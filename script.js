@@ -14,8 +14,7 @@ let questions = [
 ];
 
 let shuffledQuestions, currentQuestionIndex = 0, answered = [];
-let score = 0;  // tiap soal benar = 1 poin
-let questionAnswered = false; // flag untuk cek apakah soal sudah dijawab
+let score = 0, questionAnswered = false;
 
 function startQuiz() {
     let username = document.getElementById("username").value;
@@ -34,7 +33,7 @@ function startQuiz() {
 }
 
 function showQuestion() {
-    questionAnswered = false; // reset flag setiap soal baru
+    questionAnswered = false;
     let q = shuffledQuestions[currentQuestionIndex];
     document.getElementById("question").innerText = q.q;
     let optionsContainer = document.getElementById("options");
@@ -48,15 +47,12 @@ function showQuestion() {
         optionsContainer.appendChild(btn);
     });
 
-    // Sembunyikan tombol "Soal Berikutnya" sampai user memilih jawaban
     document.getElementById("next-btn").style.display = "none";
 }
 
 function checkAnswer(btn, index) {
-    // Cek apakah sudah dijawab sebelumnya
     if (questionAnswered) return;
-
-    questionAnswered = true;  // tandai sudah dijawab
+    questionAnswered = true;
 
     let q = shuffledQuestions[currentQuestionIndex];
     const correctMapping = { "A": 0, "B": 1, "C": 2, "D": 3 };
@@ -64,21 +60,25 @@ function checkAnswer(btn, index) {
     answered[currentQuestionIndex] = index;
 
     let buttons = document.querySelectorAll("#options .option");
-    // Nonaktifkan semua tombol opsi
+
     buttons.forEach(b => {
         b.disabled = true;
         b.style.pointerEvents = 'none';
     });
 
     if (index === correctIndex) {
-        btn.style.background = "green";
-        score++;  // tambah 1 poin
+        btn.classList.add("correct");
+        score++;
     } else {
-        btn.style.background = "red";
-        // Tandai jawaban yang benar sebagai petunjuk
-        buttons[correctIndex].style.background = "green";
+        btn.classList.add("wrong", "shake");
+
+        setTimeout(() => {
+            btn.classList.remove("shake");
+        }, 400);
+
+        buttons[correctIndex].classList.add("correct");
     }
-    // Tampilkan tombol "Soal Berikutnya"
+
     document.getElementById("next-btn").style.display = "inline-block";
 }
 
@@ -95,10 +95,9 @@ function showResult() {
     document.getElementById("quiz-container").style.display = "none";
     let resultContainer = document.getElementById("result-container");
     resultContainer.style.display = "flex";
-    document.getElementById("final-score").innerText = `Skor lu
-       ${score}/${questions.length}`;
+    document.getElementById("final-score").innerText = `Skor lu ${score}/${questions.length}`;
 }
 
 function restartQuiz() {
     location.reload();
-    }
+}
