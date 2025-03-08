@@ -1,20 +1,16 @@
 /* ===== GLOBAL STYLING ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
 body {
+    font-family: Arial, sans-serif;
     background: black;
     color: white;
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 /* ===== LOGIN CONTAINER ===== */
 #login-container {
-    height: 100vh; 
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,11 +18,11 @@ body {
 }
 
 .login-box {
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     width: 300px;
     border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
 }
 
 .login-box h2 {
@@ -39,46 +35,45 @@ input {
     margin: 10px 0;
     border: none;
     border-radius: 5px;
-    background: #222;
+    background: #333;
     color: white;
 }
 
 /* ===== TOMBOL MERAH UNTUK LOGIN, NEXT, RESTART ===== */
 button {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: none;
     cursor: pointer;
     background: #e50914;  /* Merah Netflix */
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    margin-top: 10px;
-    transition: 0.3s;
+    margin: 5px 0;
 }
 
 button:hover {
     background: #b20710;
 }
 
-/* ===== QUIZ CONTAINER ===== */
+/* ===== QUIZ CONTAINER (SAMA SEPERTI LOGIN BOX) ===== */
 #quiz-container {
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     max-width: 400px;
     margin: 50px auto;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.8);
     border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
 }
 
 /* ===== OPSI JAWABAN (HITAM & HOVER MERAH) ===== */
 .option {
     display: block;
-    padding: 12px;
+    padding: 10px;
     margin: 5px 0;
     border: 1px solid #e50914;
     cursor: pointer;
@@ -87,58 +82,60 @@ button:hover {
     color: white;
     width: 100%;
     font-weight: bold;
-    transition: 0.3s;
 }
 
 .option:hover {
     background: #e50914;
 }
 
-/* ===== EFEK BENAR & SALAH ===== */
+/* ===== Efek Shake (Getar) untuk Jawaban Salah ===== */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* ===== Warna untuk Jawaban ===== */
 .correct {
     background: green !important;
+    color: white;
 }
 
 .wrong {
     background: red !important;
+    color: white;
 }
 
-/* ===== EFEK GETAR SAAT SALAH ===== */
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-6px); }
-    40% { transform: translateX(6px); }
-    60% { transform: translateX(-6px); }
-    80% { transform: translateX(6px); }
-}
-
-.shake {
-    animation: shake 0.4s ease-in-out;
-}
-
-/* ===== RESULT CONTAINER ===== */
+/* ===== RESULT CONTAINER (CENTERED FULL SCREEN) ===== */
 #result-container {
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.8);
     border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
 }
 
+/* Result Box */
 .result-box {
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     width: 300px;
     border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
     text-align: center;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
 }
 
-/* ===== FINAL SCORE ANIMASI ===== */
+/* ===== FINAL SCORE ===== */
 #final-score {
     font-size: 50px;
     font-weight: bold;
@@ -153,11 +150,11 @@ button:hover {
     to { opacity: 1; transform: scale(1); }
 }
 
-/* ===== TOMBOL DI RESULT CONTAINER ===== */
+/* Tombol di Result Container */
 #result-container button {
     width: 100%;
     margin-top: 10px;
-    padding: 12px;
+    padding: 10px;
     font-size: 16px;
     background: #e50914;
     color: white;
