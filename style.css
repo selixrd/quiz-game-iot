@@ -1,11 +1,15 @@
 /* ===== GLOBAL STYLING ===== */
-body {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
+}
+
+body {
     background: black;
     color: white;
     text-align: center;
-    margin: 0;
-    padding: 0;
 }
 
 /* ===== LOGIN CONTAINER ===== */
@@ -18,11 +22,11 @@ body {
 }
 
 .login-box {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     padding: 20px;
     width: 300px;
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
 }
 
 .login-box h2 {
@@ -35,94 +39,106 @@ input {
     margin: 10px 0;
     border: none;
     border-radius: 5px;
-    background: #333;
+    background: #222;
     color: white;
 }
 
 /* ===== TOMBOL MERAH UNTUK LOGIN, NEXT, RESTART ===== */
 button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: none;
     cursor: pointer;
     background: #e50914;  /* Merah Netflix */
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    margin: 5px 0;
+    margin-top: 10px;
+    transition: 0.3s;
 }
 
 button:hover {
     background: #b20710;
 }
 
-/* ===== QUIZ CONTAINER (SAMA SEPERTI LOGIN BOX) ===== */
+/* ===== QUIZ CONTAINER ===== */
 #quiz-container {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     max-width: 400px;
     margin: 50px auto;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.8); /* sama dengan login box */
+    background: rgba(0, 0, 0, 0.85);
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
 }
 
 /* ===== OPSI JAWABAN (HITAM & HOVER MERAH) ===== */
 .option {
     display: block;
-    padding: 10px;
+    padding: 12px;
     margin: 5px 0;
     border: 1px solid #e50914;
     cursor: pointer;
     border-radius: 5px;
-    background: #222; /* Abu-abu gelap */
+    background: #222;
     color: white;
     width: 100%;
     font-weight: bold;
+    transition: 0.3s;
 }
 
 .option:hover {
     background: #e50914;
 }
 
-/* ===== RESULT CONTAINER (CENTERED FULL SCREEN) ===== */
-#result-container {
-    display: flex; /* Ubah dari 'none' menjadi flex untuk tampilan full screen */
-    flex-direction: column;
-    justify-content: center;  /* Center secara vertikal */
-    align-items: center;      /* Center secara horizontal */
-    height: 100vh;            /* Penuhi tinggi layar penuh */
-    margin: 0;                /* Hilangkan margin agar tidak ada jarak ekstra */
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.8); /* sama dengan login box */
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
+/* ===== EFEK BENAR & SALAH ===== */
+.correct {
+    background: green !important;
 }
 
-/* Jika kamu ingin mengemas isi result dalam kotak tersendiri, gunakan .result-box di HTML.
-   Contoh:
-   <div id="result-container">
-     <div class="result-box">
-       <h2 id="final-score">Skor lu X/12</h2>
-       <button onclick="restartQuiz()">Lagi? gas</button>
-     </div>
-   </div>
-   Lalu, tambahkan CSS untuk .result-box seperti berikut:
-*/
+.wrong {
+    background: red !important;
+}
+
+/* ===== EFEK GETAR SAAT SALAH ===== */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+}
+
+.shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+/* ===== RESULT CONTAINER ===== */
+#result-container {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
+}
+
 .result-box {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     padding: 20px;
     width: 300px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
     text-align: center;
-    margin: 0 auto;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
 }
 
-/* ===== FINAL SCORE ===== */
+/* ===== FINAL SCORE ANIMASI ===== */
 #final-score {
     font-size: 50px;
     font-weight: bold;
@@ -130,7 +146,6 @@ button:hover {
     text-shadow: 0 0 15px rgba(229, 9, 20, 0.8);
     margin: 20px 0;
     animation: fadeIn 1s ease-in-out;
-    text-align: center;
 }
 
 @keyframes fadeIn {
@@ -138,11 +153,11 @@ button:hover {
     to { opacity: 1; transform: scale(1); }
 }
 
-/* Tombol di Result Container */
+/* ===== TOMBOL DI RESULT CONTAINER ===== */
 #result-container button {
-    width: 100%;            /* Biar sama seperti tombol lain */
+    width: 100%;
     margin-top: 10px;
-    padding: 10px;
+    padding: 12px;
     font-size: 16px;
     background: #e50914;
     color: white;
@@ -153,4 +168,4 @@ button:hover {
 
 #result-container button:hover {
     background: #b20710;
-    
+    }
