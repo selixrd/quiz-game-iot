@@ -14,7 +14,8 @@ let questions = [
 ];
 
 let shuffledQuestions, currentQuestionIndex = 0, answered = [];
-let score = 0, questionAnswered = false;
+let score = 0;  
+let questionAnswered = false;
 
 function startQuiz() {
     let username = document.getElementById("username").value;
@@ -52,6 +53,7 @@ function showQuestion() {
 
 function checkAnswer(btn, index) {
     if (questionAnswered) return;
+
     questionAnswered = true;
 
     let q = shuffledQuestions[currentQuestionIndex];
@@ -60,7 +62,6 @@ function checkAnswer(btn, index) {
     answered[currentQuestionIndex] = index;
 
     let buttons = document.querySelectorAll("#options .option");
-
     buttons.forEach(b => {
         b.disabled = true;
         b.style.pointerEvents = 'none';
@@ -68,14 +69,9 @@ function checkAnswer(btn, index) {
 
     if (index === correctIndex) {
         btn.classList.add("correct");
-        score++;
+        score++;  
     } else {
-        btn.classList.add("wrong", "shake");
-
-        setTimeout(() => {
-            btn.classList.remove("shake");
-        }, 400);
-
+        btn.classList.add("wrong", "shake"); // Efek getar ditambah di sini
         buttons[correctIndex].classList.add("correct");
     }
 
