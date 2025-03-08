@@ -56,14 +56,14 @@ button:hover {
     background: #b20710;
 }
 
-/* ===== QUIZ CONTAINER (SAMA SEPERTI LOGIN BOX) ===== */
+/* ===== QUIZ CONTAINER (DIPERBAIKI POSISI TENGAH) ===== */
 #quiz-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     max-width: 400px;
-    margin: 50px auto;
+    margin: 150px auto 50px auto; /* Tambah margin atas supaya lebih ke tengah */
     padding: 20px;
     background: rgba(0, 0, 0, 0.8);
     border-radius: 8px;
